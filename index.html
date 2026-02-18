@@ -254,14 +254,23 @@
     <main id="page-about" class="page pt-28 md:pt-32 pb-20 px-6 md:px-20">
         <div class="max-w-4xl mx-auto text-center space-y-8 md:space-y-12">
             <h2 class="text-4xl md:text-5xl font-black tracking-tighter serif italic">Researcher's Mission</h2>
-            <div class="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-xl border border-stone-50">
-                <p class="text-base md:text-xl text-stone-600 leading-relaxed mb-8 md:mb-10">This project aims to provide Grade 8 students with immersive geographic data beyond textbooks.</p>
+            <!-- Softened background color from bg-white to bg-[#FAF9F6] -->
+            <div class="bg-[#FAF9F6] p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-xl border border-stone-100">
+                <div class="space-y-6 mb-10 text-stone-600 leading-relaxed">
+                    <p class="text-lg md:text-xl font-medium">This project aims to provide an <span class="text-emerald-800 font-bold italic">immersive geographic data experience</span> that extends far beyond standard textbooks.</p>
+                    <p class="text-base md:text-lg">Developed by <span class="text-black font-bold">Fareeha Jawed</span>, a dedicated Class 8 student, this initiative transforms abstract geographic concepts into a visual digital archive.</p>
+                </div>
+                
                 <div class="flex flex-col items-center gap-4">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-stone-100 rounded-full flex items-center justify-center p-3 md:p-4">
-                         <img src="https://i.ibb.co/VWVvG2k/school-logo-clear.png" alt="School Logo" class="w-full h-full object-contain">
+                    <!-- Updated photo URL as requested -->
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-stone-100 rounded-full flex items-center justify-center p-0 overflow-hidden border-2 border-stone-200">
+                         <img src="https://fareeha-portfolio.github.io/pride-imag/Untitled%20design%20(4).png" alt="Fareeha Jawed" class="w-full h-full object-cover">
                     </div>
-                    <p class="font-bold">Fareeha Jawed</p>
-                    <p class="text-[9px] md:text-xs uppercase tracking-widest text-stone-400">Pride International School</p>
+                    <p class="font-bold text-lg">Fareeha Jawed</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://fareeha-portfolio.github.io/pride-imag/329249717_1240006353289246_3134130983588794580_n.jpg" alt="School Logo" class="w-5 h-5 md:w-6 md:h-6 object-cover rounded-full">
+                        <p class="text-[9px] md:text-xs uppercase tracking-widest text-stone-400 font-bold">Pride International School</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -443,7 +452,8 @@
         }
 
         function scrollToElement(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth' });
         }
 
         function viewDetail(id) {
@@ -502,8 +512,8 @@
         const homeGrid = document.getElementById('home-expeditions-grid');
 
         destinations.forEach((dest, idx) => {
-            fullGrid.innerHTML += createDestCard(dest);
-            if(idx < 3) homeGrid.innerHTML += createDestCard(dest);
+            if(fullGrid) fullGrid.innerHTML += createDestCard(dest);
+            if(idx < 3 && homeGrid) homeGrid.innerHTML += createDestCard(dest);
         });
     </script>
 </body>
