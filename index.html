@@ -1,1 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery | Global Wilderness Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background-color: #FDFCF8; color: #1A2E1A; overflow-x: hidden; }
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .page { display: none; min-height: 100vh; animation: fadeIn 0.8s ease forwards; }
+        .page.active { display: block; }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-nav { background-color: rgba(253, 252, 248, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        
+        .nav-link { position: relative; cursor: pointer; transition: color 0.3s; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0; background-color: #1A2E1A; transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+
+        .feature-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .feature-card:hover { transform: translateY(-10px); }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FDFCF8; }
+        ::-webkit-scrollbar-thumb { background: #1A2E1A; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Global Navigation -->
+    <nav class="fixed top-0 w-full z-[100] glass-nav px-6 md:px-12 py-4 md:py-5 flex justify-between items-center">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="text-lg md:text-xl font-black tracking-tighter uppercase">Discovery</span>
+        </div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-10 text-[11px] font-bold uppercase tracking-[0.2em]">
+            <span class="nav-link" onclick="showPage('home')">Home</span>
+            <span class="nav-link" onclick="showPage('destinations')">Expeditions</span>
+            <span class="nav-link" onclick="showPage('about')">About Us</span>
+        </div>
+
+        <!-- Desktop Action -->
+        <button onclick="showPage('destinations')" class="hidden md:block bg-[#1A2E1A] text-white px-6 py-2 rounded-full text-[10px] font-bold hover:scale-105 transition-transform">
+            Explore
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="md:hidden flex flex-col gap-1.5 z-[110] p-2" onclick="toggleMobileMenu()">
+            <div id="bar1" class="w-6 h-0.5 bg-black transition-all"></div>
+            <div id="bar2" class="w-6 h-0.5 bg-black transition-all"></div>
+            <div id="bar3" class="w-6 h-0.5 bg-black transition-all"></div>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#FDFCF8] z-[105] flex flex-col items-center justify-center gap-8 md:hidden">
+        <span class="text-3xl font-black tracking-tighter serif italic mb-4">Discovery</span>
+        <span class="text-[14px] font-bold uppercase tracking-[0.4em] py-2" onclick="showPage('home'); toggleMobileMenu()">Home</span>
+        <span class="text-[14px] font-bold uppercase tracking-[0.4em] py-2" onclick="showPage('destinations'); toggleMobileMenu()">Expeditions</span>
+        <span class="text-[14px] font-bold uppercase tracking-[0.4em] py-2" onclick="showPage('about'); toggleMobileMenu()">About Us</span>
+        <div class="mt-8 pt-8 border-t border-stone-200 w-48 text-center">
+            <p class="text-[10px] uppercase tracking-widest text-stone-400">Bihar, India</p>
+        </div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <main id="page-home" class="page active pt-20">
+        <!-- Hero Section -->
+        <section class="min-h-[90vh] md:h-[95vh] flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+            <div class="absolute inset-0 -z-10">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover opacity-20" alt="Nature">
+            </div>
+            <div class="max-w-4xl py-12 md:py-0">
+                <span class="text-[9px] md:text-xs font-black uppercase tracking-[0.6em] md:tracking-[0.8em] mb-6 block text-emerald-800">Established 2026 • Bihar, India</span>
+                <h1 class="text-5xl md:text-9xl font-black tracking-tighter leading-tight md:leading-none mb-8 serif">
+                    Natural <br class="hidden md:block"><span class="italic font-medium text-stone-400">Wanderer</span>
+                </h1>
+                <p class="text-base md:text-xl text-stone-600 leading-relaxed max-w-2xl mx-auto mb-10 font-medium px-4 md:px-0">
+                    A digital journey through the Earth's most precious landscapes. Curated by Fareeha Jawed to inspire, educate, and protect our planet's future.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 px-6 md:px-0">
+                    <button onclick="showPage('destinations')" class="bg-[#1A2E1A] text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-xl hover:bg-emerald-900 transition-colors w-full sm:w-auto">Begin Expedition</button>
+                    <button onclick="scrollToElement('mission')" class="bg-white border border-stone-200 px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-stone-50 transition-colors w-full sm:w-auto">Our Philosophy</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Banner -->
+        <section class="py-12 bg-[#1A2E1A] text-white">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <h4 class="text-2xl md:text-3xl font-bold serif italic">10+</h4>
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-60">Global Sites</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl md:text-3xl font-bold serif italic">5</h4>
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-60">Continents</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl md:text-3xl font-bold serif italic">100%</h4>
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-60">Educational</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl md:text-3xl font-bold serif italic">2026</h4>
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-60">Archive Established</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section id="mission" class="py-20 md:py-32 px-6 md:px-20">
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="rounded-[2rem] md:rounded-[3rem] overflow-hidden aspect-square shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1000" class="w-full h-full object-cover" alt="Environment">
+                </div>
+                <div class="space-y-6">
+                    <span class="text-emerald-800 font-bold uppercase tracking-[0.4em] text-[10px]">The Mission</span>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tighter serif italic">Why Geography Matters</h2>
+                    <p class="text-stone-600 leading-relaxed text-sm md:text-base">Geography isn't just about maps; it's about understanding how our world works. From the tectonic movements that create mountains like Fuji to the climate cycles that shape the Sahara, everything is connected.</p>
+                    <p class="text-stone-600 leading-relaxed text-sm md:text-base">This archive serves as a Class 8 resource to help students visualize the physical features of the Earth through high-definition imagery and scientific profiles.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Preview Section -->
+        <section class="py-20 md:py-32 px-6 md:px-20 bg-[#F7F6F0]">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
+                    <div class="space-y-4">
+                        <span class="text-emerald-800 font-bold uppercase tracking-[0.4em] text-[10px]">Current Archive</span>
+                        <h2 class="text-4xl md:text-5xl font-black tracking-tighter serif italic">Featured Expeditions</h2>
+                    </div>
+                    <button onclick="showPage('destinations')" class="text-[10px] font-black uppercase tracking-[0.3em] border-b-2 border-emerald-800 pb-1">View Full Archive</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10" id="home-expeditions-grid"></div>
+            </div>
+        </section>
+
+        <!-- Geographic Knowledge Cards -->
+        <section class="py-20 md:py-32 px-6 md:px-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 md:mb-20 px-4">
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tighter serif italic">Key Earth Systems</h2>
+                    <p class="text-stone-400 uppercase tracking-widest text-[9px] md:text-[10px] mt-4">Fundamental concepts for students</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                    <div class="feature-card bg-white p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-stone-100">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-800 mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Lithosphere</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">The rigid outer part of the earth, consisting of the crust and upper mantle. Home to mountains, volcanoes, and plateaus.</p>
+                    </div>
+                    <div class="feature-card bg-white p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-stone-100">
+                        <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-800 mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Hydrosphere</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">All the waters on the earth's surface, such as lakes and seas, and sometimes including water over the earth's surface, such as clouds.</p>
+                    </div>
+                    <div class="feature-card bg-white p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-sm border border-stone-100">
+                        <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-800 mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Biosphere</h3>
+                        <p class="text-sm text-stone-500 leading-relaxed">The regions of the surface, atmosphere, and hydrosphere of the earth occupied by living organisms. Biodiversity is key to survival.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- DESTINATIONS PAGE (GALLERY) -->
+    <main id="page-destinations" class="page pt-28 md:pt-32 pb-20 px-6 md:px-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 md:mb-16">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tighter serif italic mb-4">The Top Archive</h2>
+                <p class="text-stone-400 uppercase tracking-[0.3em] text-[10px] font-bold">Comprehensive guide to Earth's natural wonders</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="dest-grid"></div>
+        </div>
+    </main>
+
+    <!-- INDIVIDUAL DESTINATION DETAIL PAGE -->
+    <main id="page-detail" class="page pt-28 md:pt-32 pb-20 px-6 md:px-20">
+        <div class="max-w-6xl mx-auto">
+            <button onclick="showPage('destinations')" class="mb-8 md:mb-10 flex items-center gap-2 text-stone-400 hover:text-black transition-colors uppercase text-[10px] font-black tracking-widest">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
+                Back to Collection
+            </button>
+
+            <div class="grid lg:grid-cols-12 gap-10 md:gap-16">
+                <div class="lg:col-span-7 space-y-10 md:space-y-12">
+                    <div class="rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl h-[300px] md:h-[500px]">
+                        <img id="detail-main-img" src="" class="w-full h-full object-cover" alt="Destination">
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold serif italic">Geographical Overview</h3>
+                        <p id="detail-desc-long" class="text-base md:text-lg text-stone-600 leading-relaxed"></p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold serif italic">Gallery</h3>
+                        <div id="detail-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-10">
+                    <div class="lg:sticky lg:top-32 space-y-8">
+                        <div>
+                            <span id="detail-loc" class="text-emerald-800 font-bold uppercase tracking-[0.4em] text-[10px] md:text-[11px]"></span>
+                            <h1 id="detail-title" class="text-4xl md:text-6xl font-black tracking-tighter serif mt-2"></h1>
+                        </div>
+
+                        <div class="bg-[#1A2E1A] text-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] space-y-6">
+                            <h4 class="font-bold uppercase tracking-widest text-[10px] md:text-xs border-b border-white/20 pb-4">Scientific Profile</h4>
+                            <div id="detail-stats" class="space-y-4">
+                                <!-- Injected by JS -->
+                            </div>
+                        </div>
+
+                        <div class="bg-stone-50 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] space-y-4 border border-stone-100">
+                            <h4 class="font-bold uppercase tracking-widest text-[10px] md:text-xs text-stone-400">Environment Highlights</h4>
+                            <ul id="detail-highlights" class="space-y-3 text-stone-600 text-sm"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ABOUT PAGE -->
+    <main id="page-about" class="page pt-28 md:pt-32 pb-20 px-6 md:px-20">
+        <div class="max-w-4xl mx-auto text-center space-y-8 md:space-y-12">
+            <h2 class="text-4xl md:text-5xl font-black tracking-tighter serif italic">Researcher's Mission</h2>
+            <div class="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-xl border border-stone-50">
+                <p class="text-base md:text-xl text-stone-600 leading-relaxed mb-8 md:mb-10">This project aims to provide Grade 8 students with immersive geographic data beyond textbooks.</p>
+                <div class="flex flex-col items-center gap-4">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-stone-100 rounded-full flex items-center justify-center p-3 md:p-4">
+                         <img src="https://i.ibb.co/VWVvG2k/school-logo-clear.png" alt="School Logo" class="w-full h-full object-contain">
+                    </div>
+                    <p class="font-bold">Fareeha Jawed</p>
+                    <p class="text-[9px] md:text-xs uppercase tracking-widest text-stone-400">Pride International School</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-[#1A2E1A] text-white py-16 md:py-20 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-bold serif italic mb-4">Discovery</h2>
+                <p class="text-stone-400 max-w-sm text-sm mx-auto md:mx-0">Empowering students through the exploration of Earth's natural wonders. A digital archive for the explorers of tomorrow.</p>
+            </div>
+            <div class="text-center md:text-right border-t border-white/10 pt-10 md:border-0 md:pt-0">
+                <p class="text-[9px] md:text-[10px] uppercase tracking-[0.5em] opacity-40">© 2026 Discovery Wilderness Archive</p>
+                <p class="text-[9px] md:text-[10px] uppercase tracking-[0.5em] opacity-40 mt-2 text-stone-500">Curated for Class 8 Geography Portfolio</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const destinations = [
+            {
+                id: 0,
+                title: "Banff",
+                location: "Alberta, Canada",
+                image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1434394354979-a235cd36269d?q=80&w=1000"
+                ],
+                desc: "Banff National Park is a masterpiece of glacial erosion. Carved during the last ice age, the landscape features 'U-shaped' valleys and jagged peaks like Mount Rundle. Geologically, it consists primarily of sedimentary rock—limestone, shale, and sandstone—stacked in massive thrust faults. The park is a critical habitat for the Grizzly bear and the elusive Mountain Goat. Its most famous feature, Lake Louise, owes its brilliant color to glacial silt called 'rock flour' which reflects the blue-green spectrum of sunlight.",
+                stats: {
+                    "Established": "1885 (Canada's 1st)",
+                    "Area": "6,641 km²",
+                    "Primary Range": "Rocky Mountains",
+                    "Highest Point": "Mount Forbes (3,612m)"
+                },
+                highlights: ["Glacial Lake Louise", "The Icefields Parkway", "Sulphur Mountain Springs", "Moraine Lake"]
+            },
+            {
+                id: 1,
+                title: "Patagonia",
+                location: "Chile & Argentina",
+                image: "https://images.unsplash.com/photo-1513407030348-c983a97b98d8?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?q=80&w=1000"
+                ],
+                desc: "Patagonia is one of the last true wildernesses on Earth, spanning the southern tip of the South American continent. The region is defined by the Andes Mountains, which act as a massive rain shadow, creating lush fjords on the Chilean side and arid steppes in Argentina. The Southern Patagonian Ice Field is the third largest continental ice sheet in the world. Key features include the 'Cuernos del Paine'—granite horns that rise 2,000 meters above the plains—and the Perito Moreno Glacier, which is one of the few glaciers in the world currently in equilibrium rather than retreating.",
+                stats: {
+                    "Climate": "Subpolar / Cold Arid",
+                    "Glaciers": "Over 48 Major Systems",
+                    "Notable Peak": "Fitz Roy (3,405m)",
+                    "Wildlife": "Puma, Guanaco, Andean Condor"
+                },
+                highlights: ["Perito Moreno Glacier", "Torres del Paine", "Mount Fitz Roy", "Marble Caves (Chile)"]
+            },
+            {
+                id: 2,
+                title: "Sahara",
+                location: "North Africa",
+                image: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1440628295988-c921448bc2fb?q=80&w=1000"
+                ],
+                desc: "The Sahara is the world's largest hot desert, covering roughly 31% of the African continent. Contrary to popular belief, only about 25% of the Sahara is covered in sand dunes (Ergs); the rest consists of rocky plateaus (Hamadas) and gravel plains (Regs). During the 'African Humid Period' 10,000 years ago, the Sahara was a lush grassland with lakes. Today, it is characterized by extreme temperature fluctuations, where daytime heat can exceed 50°C and nighttime temperatures can drop below freezing due to the lack of humidity to trap heat.",
+                stats: {
+                    "Area": "9.2 Million km²",
+                    "Countries": "Spans 11 Nations",
+                    "Dune Height": "Up to 180m",
+                    "Annual Rainfall": "Less than 100mm"
+                },
+                highlights: ["The Erg Chebbi Dunes", "Nile River Crossing", "Ancient Rock Art", "Desert Oasis Ecosystems"]
+            },
+            {
+                id: 3,
+                title: "Mount Fuji",
+                location: "Honshu, Japan",
+                image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1000"
+                ],
+                desc: "Mount Fuji is an active stratovolcano and a symbol of Japanese culture. Geologically, it is a complex volcano sitting at the triple junction of the Amurian, Okhotsk, and Philippine Sea tectonic plates. It has a nearly perfect symmetrical cone, which is snow-capped for several months of the year. Fuji is part of the Pacific 'Ring of Fire'. Its last eruption occurred in 1707 (the Hoei eruption), which formed a new crater on its flank. The mountain is surrounded by five volcanic lakes created by past lava flows damming local rivers.",
+                stats: {
+                    "Elevation": "3,776.24m",
+                    "Type": "Stratovolcano",
+                    "Status": "Active (Dormant since 1707)",
+                    "Classification": "UNESCO World Heritage"
+                },
+                highlights: ["The Five Fuji Lakes", "Chureito Pagoda View", "Lake Kawaguchi", "Aokigahara Forest"]
+            },
+            {
+                id: 4,
+                title: "Barrier Reef",
+                location: "Queensland, Australia",
+                image: "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=1000"
+                ],
+                desc: "The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs. Geologically, these reefs are massive structures of calcium carbonate built by tiny living organisms called coral polyps over millions of years. It is a vital part of the Earth's hydrosphere and biosphere, providing a home to thousands of species including sea turtles, sharks, and vibrant fish. The reef faces significant challenges from climate change and rising ocean temperatures, making its conservation a global priority for maintaining marine biodiversity.",
+                stats: {
+                    "Length": "2,300 km",
+                    "Area": "344,400 km²",
+                    "Type": "Fringing & Barrier",
+                    "Species": "1,500+ Fish Species"
+                },
+                highlights: ["Heart Reef Aerial View", "Whitsunday Islands", "Outer Reef Snorkeling", "Coral Spawning Events"]
+            },
+            {
+                id: 7,
+                title: "Jim Corbett",
+                location: "Uttarakhand, India",
+                image: "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1581852017103-68ac65514cf7?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1616128417859-3a984dd35f02?q=80&w=1000"
+                ],
+                desc: "Located in the foothills of the Himalayas, Jim Corbett National Park is the oldest national park in India. It was the first to come under the 'Project Tiger' initiative in 1973. The park's geography is characterized by the Ramganga River and its tributaries, which carve through dense Sal forests and vast grasslands known as 'Chaurs'. It serves as a critical eco-tone between the Himalayan highlands and the Terai plains. It is home to approximately 50 species of mammals, 580 species of birds, and 25 species of reptiles, representing a vital biodiversity hotspot in North India.",
+                stats: {
+                    "Established": "1936 (as Hailey NP)",
+                    "Rivers": "Ramganga, Sonanadi, Mandal",
+                    "Forest Type": "Moist Deciduous",
+                    "Flagship Species": "Royal Bengal Tiger"
+                },
+                highlights: ["Dhikala Zone Grasslands", "Ramganga Reservoir", "Tiger Conservation Center", "Elephant Corridors"]
+            },
+            {
+                id: 8,
+                title: "Amazonia",
+                location: "Brazil & Peru",
+                image: "https://images.unsplash.com/photo-1516533075015-a3838414c3ca?q=80&w=2000",
+                gallery: [
+                    "https://images.unsplash.com/photo-1580974511812-4b719714063b?q=80&w=1000",
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000"
+                ],
+                desc: "The Amazon Rainforest is the world's largest tropical rainforest and a major component of the Earth's biosphere. It produces roughly 20% of the Earth's oxygen and houses over 10% of the world's known species. The Amazon River, which feeds this basin, is the largest river by volume globally. The ecosystem relies on a delicate balance of nutrient cycling, where dust from the Sahara desert is carried by winds across the Atlantic to fertilize the Amazonian soil.",
+                stats: {
+                    "Area": "5.5 Million km²",
+                    "Basin Countries": "Spans 9 Nations",
+                    "Oxygen Production": "~20% Global",
+                    "Biodiversity": "1 in 10 known species"
+                },
+                highlights: ["Meeting of Waters", "Manaus River Port", "Anavilhanas Archipelago", "Indigenous Territories"]
+            }
+        ];
+
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const bar1 = document.getElementById('bar1');
+            const bar2 = document.getElementById('bar2');
+            const bar3 = document.getElementById('bar3');
+            
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                menu.classList.add('open');
+                bar1.style.transform = 'translateY(7px) rotate(45deg)';
+                bar2.style.opacity = '0';
+                bar3.style.transform = 'translateY(-7px) rotate(-45deg)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.remove('open');
+                bar1.style.transform = 'none';
+                bar2.style.opacity = '1';
+                bar3.style.transform = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        function scrollToElement(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function viewDetail(id) {
+            const dest = destinations.find(d => d.id === id);
+            if (!dest) return;
+
+            document.getElementById('detail-title').innerText = dest.title;
+            document.getElementById('detail-loc').innerText = dest.location;
+            document.getElementById('detail-desc-long').innerText = dest.desc;
+            document.getElementById('detail-main-img').src = dest.image;
+            
+            const statsContainer = document.getElementById('detail-stats');
+            statsContainer.innerHTML = Object.entries(dest.stats).map(([key, val]) => `
+                <div class="flex justify-between items-center text-[11px] md:text-sm">
+                    <span class="opacity-60">${key}</span>
+                    <span class="font-bold">${val}</span>
+                </div>
+            `).join('');
+
+            const highlightsList = document.getElementById('detail-highlights');
+            highlightsList.innerHTML = dest.highlights.map(h => `
+                <li class="flex items-start gap-3">
+                    <div class="mt-1 w-1.5 h-1.5 bg-emerald-500 rounded-full flex-shrink-0"></div>
+                    <span class="text-xs md:text-sm">${h}</span>
+                </li>
+            `).join('');
+
+            const galleryGrid = document.getElementById('detail-gallery');
+            galleryGrid.innerHTML = dest.gallery.map(img => `
+                <div class="rounded-2xl overflow-hidden h-40 md:h-48 shadow-md">
+                    <img src="${img}" class="w-full h-full object-cover hover:scale-105 transition-transform" alt="Gallery">
+                </div>
+            `).join('');
+
+            showPage('detail');
+        }
+
+        function createDestCard(dest) {
+            return `
+                <div class="group cursor-pointer space-y-4" onclick="viewDetail(${dest.id})">
+                    <div class="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] md:rounded-[2rem] shadow-lg">
+                        <img src="${dest.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="${dest.title}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6 md:p-8">
+                            <span class="text-white text-[10px] font-bold uppercase tracking-widest">Discover Now</span>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <h3 class="text-xl md:text-2xl font-bold serif italic">${dest.title}</h3>
+                        <p class="text-stone-400 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">${dest.location}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        const fullGrid = document.getElementById('dest-grid');
+        const homeGrid = document.getElementById('home-expeditions-grid');
+
+        destinations.forEach((dest, idx) => {
+            fullGrid.innerHTML += createDestCard(dest);
+            if(idx < 3) homeGrid.innerHTML += createDestCard(dest);
+        });
+    </script>
+</body>
+</html>
